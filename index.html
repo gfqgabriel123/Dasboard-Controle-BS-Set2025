@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard – BS Control Form – Análise de Conformidade</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <h1>Dashboard – BS Control Form – Análise de Conformidade</h1>
+            <p class="report-date">Data do Relatório: 01 de Outubro, 2025</p>
+        </header>
+
+        <!-- KPIs Section - Now with 3 cards centered -->
+        <section class="kpis-section">
+            <div class="kpi-card">
+                <div class="kpi-value" id="total-contratos">0</div>
+                <div class="kpi-label">Total de Contratos</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-value success" id="taxa-sim">0%</div>
+                <div class="kpi-label">Taxa de resposta Sim/Yes</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-value error" id="taxa-nao">0%</div>
+                <div class="kpi-label">Taxa de resposta Não/No</div>
+            </div>
+        </section>
+
+        <!-- Detailed Analysis Section -->
+        <section class="details-section">
+            <div class="section-header">
+                <h2>Análise Detalhada</h2>
+                <div class="spoe-indicator">
+                    <span class="status warning" id="riscos-spoe-badge">
+                        <span>⚠️</span>
+                        <span>Riscos com Problemas SPOE: <span id="riscos-spoe">0</span></span>
+                    </span>
+                </div>
+            </div>
+            <div class="filter-container">
+                <label for="contract-select" class="form-label">Selecionar Contrato:</label>
+                <select id="contract-select" class="form-control">
+                    <option value="">Selecione um contrato...</option>
+                </select>
+            </div>
+            <div id="contract-details" class="contract-details hidden">
+                <div class="contract-info-card">
+                    <div class="contract-basic-info">
+                        <h3 id="contract-name"></h3>
+                    </div>
+                </div>
+                <div class="conformance-lists">
+                    <div class="list-container">
+                        <div class="list-header success" onclick="toggleList('conformes')">
+                            <span class="status-bullet green">✓</span>
+                            <span>Itens Sim/Yes</span>
+                            <span id="conformes-count" class="count"></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <ul id="conformes-list" class="conformance-list"></ul>
+                    </div>
+                    <div class="list-container">
+                        <div class="list-header error" onclick="toggleList('nao-conformes')">
+                            <span class="status-bullet red">✗</span>
+                            <span>Itens Não/No</span>
+                            <span id="nao-conformes-count" class="count"></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <ul id="nao-conformes-list" class="conformance-list"></ul>
+                    </div>
+                    <div class="list-container">
+                        <div class="list-header info" onclick="toggleList('nao-aplicaveis')">
+                            <span class="status-bullet gray">○</span>
+                            <span>Itens Não Aplicáveis</span>
+                            <span id="nao-aplicaveis-count" class="count"></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <ul id="nao-aplicaveis-list" class="conformance-list"></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
